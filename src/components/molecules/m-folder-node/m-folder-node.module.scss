@@ -1,0 +1,11 @@
+.m-folder-node {
+  .folder-node__title {
+    display: flex;
+    align-items: center;
+  }
+
+  .folder-node__icon {
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}
