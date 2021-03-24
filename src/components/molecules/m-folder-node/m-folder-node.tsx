@@ -21,7 +21,7 @@ const MFolderNode: React.FC<Props> = (props) => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
 
     const itemChildren = item.children as Array<any>;
-    const isChildrenExist = itemChildren?.length;
+    const isChildrenExist = Boolean(itemChildren?.length);
     const deepIcon = isOpen ? '🔽' : '🔼';
     const icon = isChildrenExist ? deepIcon : '';
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import OTree from './components/unique-organisms/o-tree';
 import reportWebVitals from './reportWebVitals';
+
+import './firebaseApp';
 
 ReactDOM.render(
   <React.StrictMode>

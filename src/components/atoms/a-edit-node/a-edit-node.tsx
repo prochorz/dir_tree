@@ -59,8 +59,14 @@ const AEditNode: React.FC<Props> = (props) => {
             </div>
             { isEditMode && (
                 <div>
-                    <AButton label={deleteIcon} onClick={onDeleteHandler}/>
-                    <AButton label={closeIcon} onClick={toggleEditMode}/>
+                    <AButton
+                        label={deleteIcon}
+                        onClick={onDeleteHandler}
+                    />
+                    <AButton
+                        label={closeIcon}
+                        onClick={toggleEditMode}
+                    />
                 </div>
             ) }
         </div>

@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
-import testData from '../assets/testData.json';
+import { foldersRef } from '../firebaseApp';
 
 export const useData = () => {
-    const [data, setData] = useState(testData);
+    const [data, setLocalData] = useState<any>([]);
 
     const updateItemById = (id: number, name: string) => {
         function updateData(list: Array<any>) {
@@ -11,7 +11,7 @@ export const useData = () => {
                 let localItem = item;
                 const isChildrenExist = item.children?.length;
 
-                if (item._id === id) {
+                if (item.id === id) {
                     localItem = {
                         ...item,
                         name
@@ -36,7 +36,7 @@ export const useData = () => {
                 let localItem = item;
                 const isChildrenExist = item.children?.length;
 
-                if (item._id === id) {
+                if (item.id === id) {
                     localItem = null
                 } else if(isChildrenExist) {
                     localItem = {
@@ -59,7 +59,7 @@ export const useData = () => {
                 let localItem = item;
                 const isChildrenExist = item.children?.length;
 
-                if (item._id === id) {
+                if (item.id === id) {
                     isNewItemExist = true;
                 } else if(isChildrenExist) {
                     localItem = {
@@ -71,7 +71,7 @@ export const useData = () => {
                 if (isNewItemExist) {
                     const newItem = {
                         name: 'New item',
-                        _id: Date.now()
+                        id: Date.now()
                     };
 
                     if (isChildrenExist) {
@@ -87,6 +87,18 @@ export const useData = () => {
 
         setData(addData(data));
     }
+
+    function subscribeData() {
+        foldersRef.on('value', snapshot => {
+            setLocalData(snapshot.val());
+        })
+    }
+
+    function setData(updateData: any) {
+        foldersRef.set(updateData);
+    }
+
+    useEffect(subscribeData, []);
 
     return {
         data,

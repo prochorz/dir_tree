@@ -7,8 +7,6 @@ import OTreeNode from '../o-tree-node';
 
 import { dataContext, useData } from '../../../context/data';
 
-import { firebaseApp } from '../../../firebaseApp';
-
 export interface Props {
     render?: any,
     className?: string,
@@ -21,14 +19,12 @@ const OTree: React.FC<Props> = (props) => {
 
     const ctxClass = cx(Style['o-tree'], className);
 
-    firebaseApp.auth().signInWithEmailAndPassword('root@test.com', '123456');
-
     return (
         <dataContext.Provider value={context}>
             <div className={ ctxClass }>
-                { context.data.map(item => (
+                { context.data.map((item: any) => (
                     <OTreeNode
-                        key={item._id}
+                        key={item.id}
                         item={item}
                     />
                 )) }

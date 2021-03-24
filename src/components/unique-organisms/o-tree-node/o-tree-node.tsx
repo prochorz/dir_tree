@@ -19,20 +19,20 @@ const OTreeNode: React.FC<Props> = (props) => {
     const { updateItemById, deleteItemById, addItemById } = useContext(dataContext);
 
     const itemChildren = item.children as Array<any>;
-    const isChildrenExist = itemChildren?.length;
+    const isChildrenExist = Boolean(itemChildren?.length);
 
     const ctxClass = cx(Style['o-tree-node'], className);
 
     function onChangeHandler(value: string) {
-        updateItemById(item._id, value);
+        updateItemById(item.id, value);
     }
 
     function onDeleteHandler() {
-        deleteItemById(item._id);
+        deleteItemById(item.id);
     }
 
     function onAddHandler() {
-        addItemById(item._id);
+        addItemById(item.id);
     }
 
     return (
@@ -47,7 +47,7 @@ const OTreeNode: React.FC<Props> = (props) => {
                     <div>
                         { itemChildren.map(childItem => (
                             <OTreeNode
-                                key={childItem._id}
+                                key={childItem.id}
                                 item={childItem}
                             />
                         )) }

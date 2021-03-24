@@ -10,9 +10,11 @@ export const config = {
 };
 
 const firebaseApp = firebase.initializeApp(config);
-const folderRef = firebaseApp.database().ref().child('folders');
+const foldersRef = firebaseApp.database().ref();
+
+firebaseApp.auth().signInWithEmailAndPassword('root@test.com', '123456');
 
 export {
     firebaseApp,
-    folderRef
+    foldersRef
 }
